@@ -19,10 +19,11 @@ namespace Advent2019.DotNetCoreSolutions
         {
             List<string> results = new List<string>();
 
+            var keyString = string.Format("day{0}Input.txt", day);
             GetObjectRequest awsRequest = new GetObjectRequest
             {
                 BucketName = "advent2019bednar",
-                Key = "day1Input.txt"
+                Key = keyString
             };
 
             using (GetObjectResponse s3Response = await S3Client.GetObjectAsync(awsRequest))
