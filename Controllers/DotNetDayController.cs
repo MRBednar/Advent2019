@@ -20,11 +20,11 @@ namespace Advent2019.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("{id}")]
+        public IEnumerable<string> Get(int id)
         {
             var runner = new DayRunner();
-            var answerString = runner.RunDay(1);
+            var answerString = runner.RunDay(id);
             var returnArray = new List<string>();
             returnArray.Add(answerString);
             return returnArray;
