@@ -4,11 +4,10 @@ export class DotNetCore extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { dayAnswer: "", loading: true };
-    }
+        this.state = { dayAnswer: "", loading: false, dayNumber: 1 };
 
-    componentDidMount() {
-        this.getDayAnswer();
+        this.setAndRunDay = this.setAndRunDay.bind(this);
+        this.changeDrop = this.changeDrop.bind(this);
     }
 
     static renderTextTest(response) {
@@ -22,16 +21,29 @@ export class DotNetCore extends Component {
         return (
             <div>
                 <h1>
-                    <p>This is Where C# Code will go</p>
+                    <p>Select day to run: <select value={this.state.dayNumber} onChange={this.changeDrop}>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select></p>
+                    <p><button className="btn btn-primary" onClick={this.setAndRunDay}>Run for day</button></p>
                     {contents}
                 </h1>
             </div>
         );
     }
 
+    async setAndRunDay() {
+        this.setState({ dayAnswer: "", loading: true, dayNumber: this.state.dayNumber }, () => { this.getDayAnswer(); });
+    }
+
+    changeDrop(event) {
+        this.setState({ dayAnswer: this.state.dayAnswer, loading: this.state.loading, dayNumber: event.target.value });
+    }
+
     async getDayAnswer() {
-        var response = await fetch('dotnetday/3');
+        var response = await fetch('dotnetday/' + this.state.dayNumber);
         var data = await response.json();
-        this.setState({ dayAnswer: data, loading: false });
+        this.setState({ dayAnswer: data, loading: false, dayNumber: this.state.dayNumber });
     }
 }
