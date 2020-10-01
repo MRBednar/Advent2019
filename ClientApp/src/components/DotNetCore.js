@@ -30,7 +30,7 @@ export class DotNetCore extends Component {
     }
 
     async getDayAnswer() {
-        var response = await fetch('dotnetday/2');
+        var response = await fetch('dotnetday/3');
         var data = await response.json();
         this.setState({ dayAnswer: data, loading: false });
     }
