@@ -13,20 +13,15 @@ namespace Advent2019.Controllers
     [ApiController]
     public class DotNetDayController : ControllerBase
     {
-        private readonly ILogger<DotNetDayController> _logger;
-
-        public DotNetDayController(ILogger<DotNetDayController> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpGet("{id}")]
         public IEnumerable<string> Get(int id)
         {
             var runner = new DayRunner();
             var answerString = runner.RunDay(id);
-            var returnArray = new List<string>();
-            returnArray.Add(answerString);
+            var returnArray = new List<string>
+            {
+                answerString
+            };
             return returnArray;
         }
 
