@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Amazon.S3;
 
@@ -56,8 +55,10 @@ namespace Advent2019.DotNetCoreSolutions.Days
         private Dictionary<(int, int), int> WirePath (string wireDirections)
         {
             var wireLineMove = wireDirections.Split(',');
-            var locationDict = new Dictionary<(int, int), int>();
-            locationDict.Add((0, 0), 0);
+            var locationDict = new Dictionary<(int, int), int>
+            {
+                { (0, 0), 0 }
+            };
             var steps = 0;
             foreach(var move in wireLineMove)
             {
@@ -72,7 +73,7 @@ namespace Advent2019.DotNetCoreSolutions.Days
                         int upMoves = 0;
                         while (upMoves < distance)
                         {
-                            currentY = currentY + 1;
+                            currentY += 1;
                             steps++;
                             locationDict.TryAdd((currentX, currentY), steps);
                             upMoves++;
@@ -82,7 +83,7 @@ namespace Advent2019.DotNetCoreSolutions.Days
                         int downMoves = 0;
                         while (downMoves < distance)
                         {
-                            currentY = currentY - 1;
+                            currentY -= 1;
                             steps++;
                             locationDict.TryAdd((currentX, currentY), steps);
                             downMoves++;
@@ -92,7 +93,7 @@ namespace Advent2019.DotNetCoreSolutions.Days
                         int rightMoves = 0;
                         while (rightMoves < distance)
                         {
-                            currentX = currentX + 1;
+                            currentX += 1;
                             steps++;
                             locationDict.TryAdd((currentX, currentY), steps);
                             rightMoves++;
@@ -102,7 +103,7 @@ namespace Advent2019.DotNetCoreSolutions.Days
                         int leftMoves = 0;
                         while (leftMoves < distance)
                         {
-                            currentX = currentX - 1;
+                            currentX -= 1;
                             steps++;
                             locationDict.TryAdd((currentX, currentY), steps);
                             leftMoves++;
